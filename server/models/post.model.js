@@ -22,6 +22,8 @@ const postSchema = mongoose.Schema({
         ref: "Company",
         required: true
     }
+},{
+    timestamps: true
 });
 
 const Post = mongoose.model("post", postSchema);

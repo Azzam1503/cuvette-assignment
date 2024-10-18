@@ -19,3 +19,13 @@ export const createPost = async (req, res) => {
         console.log(error);
     }
 };
+
+export const getAllPosts = async (req, res) => {
+    try {
+        const allPosts = await Post.find({}).sort({createdAt: -1});
+        return res.status(200).json(allPosts);
+    } catch (error) {
+        console.log(error);
+        return res.status(501).json({message: "Error while getting the posts"});
+    }
+}
