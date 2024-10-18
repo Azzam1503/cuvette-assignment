@@ -1,0 +1,5 @@
+.create-div{
+    display: flex;
+    flex-direction: col;
+    width: 70%;
+}
