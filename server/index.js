@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import compRouter from "./routes/company.route.js";
 import postRouter from "./routes/post.route.js";
+import cors from "cors";
 import { connectDB } from "./config/db.js";
 const app = express();
 const PORT = 8000;
@@ -11,6 +12,12 @@ dotenv.config();
 connectDB();
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
+
+
 app.get("/", (req, res) => {
     res.send("Hello");
 });

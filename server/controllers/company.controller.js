@@ -5,7 +5,8 @@ import Company from "../models/company.model.js";
 
 
 export const createCompany = async (req , res) => {
-    console.log("Yeah I am called");
+    try {
+        console.log("Yeah I am called");
     const {username, companyEmail, companyName, companyPhone, password, employeeSize} = req.body;
     if(!username ||  !companyEmail  || !companyName || !companyPhone || !password || !employeeSize){
         return res.status(401).json("All fields are required");
@@ -18,7 +19,7 @@ export const createCompany = async (req , res) => {
         ]
     });
     if(ifExisting){
-        res.status(401).json({messaage: "Email or Phone number already used"});
+        return res.status(401).json({messaage: "Email or Phone number already used"});
     };
     const saltRounds = bcryptjs.genSaltSync(10);
     const hashedPassword = bcryptjs.hashSync(password, saltRounds);
@@ -34,6 +35,10 @@ export const createCompany = async (req , res) => {
 
     console.log(newComp);
     return res.status(200).json({success: true, message: "Company created successfully"});
+    } catch (error) {
+        console.log("error in the create user", error);
+        return res.status(551).json("All fields are required");
+    }
 };
 
 export const login = async (req, res) =>{
