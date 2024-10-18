@@ -1,0 +1,20 @@
+nav{
+    margin-top: 43px;
+    height: 43px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav img{
+    margin-left: 60px;
+}
+
+.nav-p {
+    font-family: sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 36.46px;
+    text-align: left;
+    margin-right: 100px;
+    color: #576474;
+}
