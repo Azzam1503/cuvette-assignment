@@ -17,6 +17,10 @@ const companySchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    password:{
+        type: String,
+        required: true,
+    },
     employeeSize: {
         type: Number
     },
