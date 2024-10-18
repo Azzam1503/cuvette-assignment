@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
 const postSchema = mongoose.Schema({
-    titie:{
+    title:{
         type: String,
         required: true
     },
@@ -14,7 +14,12 @@ const postSchema = mongoose.Schema({
         requried: true
     },
     endDate:{
-        type: Date,
+        type: String,
+        required: true
+    },
+    companyId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Company",
         required: true
     }
 });

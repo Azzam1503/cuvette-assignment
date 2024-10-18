@@ -33,7 +33,7 @@ export const createCompany = async (req , res) => {
     });
 
     console.log(newComp);
-    return res.status(200).json({success: true, newComp});
+    return res.status(200).json({success: true, message: "Company created successfully"});
 };
 
 export const login = async (req, res) =>{

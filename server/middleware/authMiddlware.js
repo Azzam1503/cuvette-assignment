@@ -11,8 +11,7 @@ const isLoggedIn = async (req, res, next) => {
             return res.status(401).json({message: "Authentication failed"});
         };
 
-        console.log(decoded);
-        req.companyId = decoded._id;
+        req.company = decoded.id;
         next();
     } catch (error) {
         console.log("Error in auth middlware", error);

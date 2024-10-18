@@ -1,7 +1,21 @@
+import Post from "../models/post.model.js";
+
 export const createPost = async (req, res) => {
     try {
-        console.log("In the create post method")
+        const {title, description, experienceLevel, endDate} = req.body;
+        if(!title || !description ||  !experienceLevel || !endDate) return res.status(401).json({message: "All field are required"});
+
+        const companyId = req.company;
+        const newPost = await Post.create({
+            title,
+            description, 
+            experienceLevel, 
+            endDate,
+            companyId
+        });
+
+        return res.status(200).json({message: "Post created successfully", success: true, newPost});
     } catch (error) {
         console.log(error);
     }
-}
+};
