@@ -132,6 +132,7 @@ export const sendOtp = async (req, res) => {
 
 export const logout = async (req, res) =>{
     try {
+        console.log("logut called");
         res.clearCookie("token");
         res.sendStatus(200);
     } catch (error) {
