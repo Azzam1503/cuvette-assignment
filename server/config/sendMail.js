@@ -13,11 +13,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-
-console.log(process.env.APP_PASSWORD)
-console.log(process.env.SENDER_EMAIL)
-
-  const sendEmailToUsers = (users) => {
+export const sendEmailToUsers = (users) => {
     users.forEach((user) => {
       const mailOptions = {
         from: process.eventNames.USER,
