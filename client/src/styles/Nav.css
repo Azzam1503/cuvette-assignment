@@ -1,6 +1,7 @@
 nav{
     margin-top: 43px;
     height: 43px;
+    width: 1580px;
     display: flex;
     justify-content: space-between;
 }

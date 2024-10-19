@@ -1,9 +1,9 @@
-.signup{
+.signin{
     display: flex;
     justify-content: space-evenly;
 }
 
-.sing-up{
+.sing-in{
     margin-top: 170px;
     width: 100%;
     max-width: 500px;
@@ -20,16 +20,6 @@
 
 .heading{
     text-align: center;
-}
-
-input {
-    background: #F4F4F4;
-    width: 400px;
-    height: 40px;
-    margin-top: 20px;
-    border: 1px solid #CCCCCC;
-    border-radius: 7px;
-    padding: 10px;
 }
 
 .side-text{

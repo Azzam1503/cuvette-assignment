@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate();
     const [details, setDetails] = useState({
-        companyEmail: "",
+        email: "",
         password: "",
     });
     
@@ -32,14 +32,14 @@ const Login = () => {
 
 
   return (
-    <div className='signup'>
+    <div className='signin'>
       <div className='side-text'>
         <p>Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</p>
       </div>
-      <div className='sing-up'>
+      <div className='sing-in'>
       <h2 className='heading'>Login In</h2>
       <p className='p1'>Lorem Ipsum is simply dummy text</p>
-        <input type="text" name='companyEmail' id='companyEmail' placeholder='Company Email' value={details.companyEmail} onChange={handleChage} />
+        <input type="text" name='email' id='email' placeholder='Company Email' value={details.email} onChange={handleChage} />
         <input type="text" name='password' id='password' placeholder='password' value={details.password} onChange={handleChage} />
             <p className='p2'>Create an account</p>
             <p className='p3'><a href="">Terms </a>&<a href=""> Conditions</a></p>

@@ -23,7 +23,10 @@ const Signup = () => {
                 withCredentials: true
             });
             console.log(res);
-            navigate("/login");
+            if(res.data.success){
+              localStorage.setItem("emailForVerification", details.companyEmail);
+              navigate("/verification");
+            }
         } catch (error) {
             console.log(error);
         }

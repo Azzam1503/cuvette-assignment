@@ -2,9 +2,10 @@ import Post from "../models/post.model.js";
 
 export const createPost = async (req, res) => {
     try {
+        console.log("here I am");
+        console.log(req.body);
         const {title, description, experienceLevel, endDate} = req.body;
         if(!title || !description ||  !experienceLevel || !endDate) return res.status(401).json({message: "All field are required"});
-
         const companyId = req.company;
         const newPost = await Post.create({
             title,

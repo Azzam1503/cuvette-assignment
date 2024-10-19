@@ -31,6 +31,9 @@ const companySchema = mongoose.Schema({
     isEmailVerified: {
         type: Boolean,
         default: false
+    },
+    verificationCode: {
+        type: String
     }
 
 },{

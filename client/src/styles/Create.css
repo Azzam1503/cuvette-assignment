@@ -2,4 +2,69 @@
     display: flex;
     flex-direction: col;
     width: 70%;
+    margin-left: 100px;
+}
+
+.create-input, select {
+    background: #F4F4F4;
+    width: 653px;
+    height: 70px;
+    margin-top: 20px;
+    border: 1px solid #CCCCCC;
+    border-radius: 7px;
+    padding: 10px;
+    font-size: 32px;
+
+}
+
+textarea{
+    font-family: sans-serif;
+    background: #F4F4F4;
+    margin-top: 20px;
+    border: 1px solid #CCCCCC;
+    border-radius: 7px;
+    padding: 10px;
+    line-height: 1.5; 
+    text-align: left;  
+}
+
+.text-area{
+    display: flex;
+    gap: 10px;
+}
+
+.text-area-label{
+    margin-top: 25px;
+}
+
+.titles{
+    font-weight: 400;
+    font-size: 32px;
+}
+
+.add-candi-btn{
+
+}
+
+.remove-candi-btn{
+
+}
+
+.title{
+
+}
+
+.description{
+
+}
+.experience{
+
+}
+
+.date{
+
+}
+
+.candidates{
+
 }

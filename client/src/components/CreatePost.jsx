@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../styles/Create.css";
 import { useNavigate } from "react-router-dom";
+import { IoMdAdd } from "react-icons/io";
+import { FaTrash } from "react-icons/fa";
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ const CreatePost = () => {
     experienceLevel: "",
     endDate: "",
   });
-
+  console.log(details)
   const [candidate, setCandidate] = useState({
     id: null,
     email: ""
@@ -42,8 +44,8 @@ const CreatePost = () => {
       e.preventDefault();
       console.log("I am called");
       const res = await axios.post(
-        "http://localhost:8000/api/company/login",
-        details,
+        "http://localhost:8000/api/post/create",
+        {...details, candidates},
         {
           withCredentials: true,
         }
@@ -52,6 +54,8 @@ const CreatePost = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
+    }finally{
+
     }
   };
 
@@ -63,10 +67,10 @@ const CreatePost = () => {
   return (
     <div className="create-div">
       <div className="">
-        <h2>Create Job Post</h2>
         <div>
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title" className="titles">Title</label>
           <input
+          className="create-input title"
             type="text"
             name="title"
             id="title"
@@ -75,11 +79,12 @@ const CreatePost = () => {
             onChange={handleChage}
           />
         </div>
-        <div>
-          <label htmlFor="">Description</label>
+        <div className="text-area">
+          <label htmlFor="description" className="text-area-label titles">Description</label>
           <textarea
-            rows={10}
-            cols={45}
+            className="description"
+            rows={8}
+            cols={63}
             type="text"
             name="description"
             id="description"
@@ -89,8 +94,9 @@ const CreatePost = () => {
           />
         </div>
         <div>
-          <label htmlFor="expericeLevel">Expericence Level</label>
+          <label htmlFor="expericeLevel" className="titles">Expericence Level</label>
           <select
+            className="create-input experience"
             name="experienceLevel"
             id="experienceLevel"
             value={details.experienceLevel}
@@ -104,20 +110,22 @@ const CreatePost = () => {
           </select>
         </div>
         <div>
-          <label htmlFor="data">End date</label>
+          <label htmlFor="endDate" className="titles">End date</label>
           <input
+            className="create-input date"
             type="date"
-            name="date"
-            id="date"
+            name="endDate"
+            id="endDate"
             placeholder="Select a date"
             required
-            value={details.data}
+            value={details.endDate}
             onChange={handleChage}
           />
         </div>
         <div>
-          <label htmlFor="">Add candidates</label>
+          <label htmlFor="" className="titles">Add candidates</label>
           <input
+            className="create-input"
             type="text"
             placeholder="Company Email"
             value={candidate.email}
@@ -126,17 +134,17 @@ const CreatePost = () => {
               email: e.target.value
             })}
           />
-          <button type="button" onClick={addCandidate}>Add</button>
+          <button type="button" className="add-candi-btn" onClick={addCandidate}><IoMdAdd /></button>
         </div>
             <div>{candidates.map((candidate) => (
               <div key={candidate.id}>
                 <span>{candidate.email}</span>  
-                <button type="button" onClick={() => removeCandidate(candidate.id)}>X</button>
+                <button type="button" className="remove-candi-btn" onClick={() => removeCandidate(candidate.id)}><FaTrash /></button>
               </div>
             ))}</div>
         <br />
         <button className="btn" onClick={handleSubmit}>
-          Proceed
+          Send
         </button>
       </div>
     </div>

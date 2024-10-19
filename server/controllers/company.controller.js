@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import Company from "../models/company.model.js";
+import { sendVerifcationCode } from "../config/sendMail.js";
 
 
 export const createCompany = async (req , res) => {
@@ -21,8 +22,11 @@ export const createCompany = async (req , res) => {
     if(ifExisting){
         return res.status(401).json({messaage: "Email or Phone number already used"});
     };
+    
     const saltRounds = bcryptjs.genSaltSync(10);
     const hashedPassword = bcryptjs.hashSync(password, saltRounds);
+    
+    const otp =  Math.floor(100000 + Math.random() * 900000).toString(); 
 
     const newComp = await Company.create({
         username,
@@ -30,9 +34,12 @@ export const createCompany = async (req , res) => {
         companyName, 
         companyPhone,
         password: hashedPassword, 
-        employeeSize
+        employeeSize,
+        verificationCode: otp
     });
-
+    
+    sendVerifcationCode(companyEmail, otp);
+      
     console.log(newComp);
     return res.status(200).json({success: true, message: "Company created successfully"});
     } catch (error) {
@@ -62,6 +69,32 @@ export const login = async (req, res) =>{
         });
 
         return res.status(200).json({message: "Logged In successfully"});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const verify = async (req, res) => {
+    try {
+        const {email, otp} = req.body;
+        if(!email || !otp) {
+            return res.json(400).json({message: "All fields are required"});
+        };
+
+        const company = await Company.findOne({companyEmail: email});
+
+        if(!company){
+            return res.status(404).json({message: "Company not found"});
+        };
+
+        if(company.verificationCode !== otp){
+            return res.status(400).json({ message: "Invalid OTP" });
+        };
+
+        company.isEmailVerified = true;
+        company.verificationCode = null;
+        await company.save();
+        return res.status(200).json({ success: true, message: "Company verified successfully" });
     } catch (error) {
         console.log(error);
     }
