@@ -48,7 +48,7 @@ const CreatePost = () => {
       e.preventDefault();
       console.log("I am called");
       const res = await axios.post(
-        "http://localhost:8000/api/post/create",
+        "https://cuvette-assignment-mva1.onrender.com/api/post/create",
         {...details, candidates},
         {
           withCredentials: true,

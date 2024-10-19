@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from "axios";
 import "../styles/Login.css"
 import { useNavigate, Link } from 'react-router-dom';
+import { useContext } from 'react';
+import  UserContext from '../context/UserContext';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -9,21 +11,23 @@ const Login = () => {
         email: "",
         password: "",
     });
-    
+    const {setUser} = useContext(UserContext);
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
             console.log("I am called");
-            const res = await axios.post("http://localhost:8000/api/company/login",
+            const res = await axios.post("https://cuvette-assignment-mva1.onrender.com/api/company/login",
                 details,{
                 withCredentials: true
             });
-            console.log(res.data);
             if(!res.data.isVerified){
-              await axios.post("http://localhost:8000/api/company/send-otp", {email: details.email});
+              await axios.post("https://cuvette-assignment-mva1.onrender.com/company/send-otp", {email: details.email});
               localStorage.setItem("emailForVerification", details.email);
               navigate("/verification");
             }
+
+            localStorage.setItem("user", JSON.stringify(res.data.data));
+            setUser(res.data.data);
             navigate("/");
         } catch (error) {
             console.log(error);

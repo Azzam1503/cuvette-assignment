@@ -22,7 +22,7 @@ const Verification = () => {
         try {
             e.preventDefault();
             console.log("I am called");
-            const res = await axios.post("http://localhost:8000/api/company/verify",
+            const res = await axios.post("https://cuvette-assignment-mva1.onrender.com/api/company/verify",
                 {email, otp},{
                 withCredentials: true
             });

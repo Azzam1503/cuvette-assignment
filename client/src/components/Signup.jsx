@@ -18,7 +18,7 @@ const Signup = () => {
         try {
             e.preventDefault();
             console.log("I am called");
-            const res = await axios.post("http://localhost:8000/api/company/create",
+            const res = await axios.post("https://cuvette-assignment-mva1.onrender.com/api/company/create",
                 details,{
                 withCredentials: true
             });
