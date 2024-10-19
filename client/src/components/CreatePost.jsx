@@ -34,6 +34,10 @@ const CreatePost = () => {
       id: candidates.length + 1,
       email: candidate.email
     }]);
+    setCandidate({
+      id: null,
+      email: ""
+    })
   };
   const removeCandidate = (id) => {
     const filteredCandiates = candidates.filter((candidate) => candidate.id != id);
@@ -83,8 +87,8 @@ const CreatePost = () => {
           <label htmlFor="description" className="text-area-label titles">Description</label>
           <textarea
             className="description"
-            rows={8}
-            cols={63}
+            rows={5}
+            cols={48}
             type="text"
             name="description"
             id="description"
@@ -94,7 +98,7 @@ const CreatePost = () => {
           />
         </div>
         <div>
-          <label htmlFor="expericeLevel" className="titles">Expericence Level</label>
+          <label htmlFor="expericeLevel" className="titles">Expericence</label>
           <select
             className="create-input experience"
             name="experienceLevel"
@@ -125,7 +129,7 @@ const CreatePost = () => {
         <div>
           <label htmlFor="" className="titles">Add candidates</label>
           <input
-            className="create-input"
+            className="create-input candidates"
             type="text"
             placeholder="Company Email"
             value={candidate.email}
@@ -134,16 +138,16 @@ const CreatePost = () => {
               email: e.target.value
             })}
           />
-          <button type="button" className="add-candi-btn" onClick={addCandidate}><IoMdAdd /></button>
+          <button type="button" disabled={candidate.email.length < 5} className="add-candi-btn" onClick={addCandidate}><IoMdAdd /></button>
         </div>
-            <div>{candidates.map((candidate) => (
-              <div key={candidate.id}>
+            <div className="candidate-div">{candidates.map((candidate) => (
+              <div key={candidate.id} >
                 <span>{candidate.email}</span>  
                 <button type="button" className="remove-candi-btn" onClick={() => removeCandidate(candidate.id)}><FaTrash /></button>
               </div>
             ))}</div>
         <br />
-        <button className="btn" onClick={handleSubmit}>
+        <button className="send-btn" onClick={handleSubmit}>
           Send
         </button>
       </div>

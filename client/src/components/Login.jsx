@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios";
 import "../styles/Login.css"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,7 +18,12 @@ const Login = () => {
                 details,{
                 withCredentials: true
             });
-            console.log(res);
+            console.log(res.data);
+            if(!res.data.isVerified){
+              await axios.post("http://localhost:8000/api/company/send-otp", {email: details.email});
+              localStorage.setItem("emailForVerification", details.email);
+              navigate("/verification");
+            }
             navigate("/");
         } catch (error) {
             console.log(error);
@@ -41,8 +46,7 @@ const Login = () => {
       <p className='p1'>Lorem Ipsum is simply dummy text</p>
         <input type="text" name='email' id='email' placeholder='Company Email' value={details.email} onChange={handleChage} />
         <input type="text" name='password' id='password' placeholder='password' value={details.password} onChange={handleChage} />
-            <p className='p2'>Create an account</p>
-            <p className='p3'><a href="">Terms </a>&<a href=""> Conditions</a></p>
+            <p className='p2'><Link to={"/register"}> Create an Account</Link></p>
         <button className='btn' onClick={handleSubmit}>Proceed</button>
       </div>
     </div>

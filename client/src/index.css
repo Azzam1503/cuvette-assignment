@@ -7,3 +7,14 @@
 body{
     font-family: sans-serif;
 }
+
+.btn-create{
+    margin: 25px 0px 0px 20px;
+    width: 400px;
+    height: 57px;
+    border-radius: 7px;
+    background: #0B66EF;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 24px;
+}

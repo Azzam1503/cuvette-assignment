@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios";
 import "../styles/Signup.css"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -53,7 +53,8 @@ const Signup = () => {
         <input type="text" name='password' id='password' placeholder='password' value={details.password} onChange={handleChage} />
         <input type="text" name='employeeSize' id='employeeSize' placeholder='Employee Size' value={details.employeeSize} onChange={handleChage} />
             <p className='p2'>By clicking on proceed you will accept our</p>
-            <p className='p3'><a href="">Terms </a>&<a href=""> Conditions</a></p>
+            <p className='p3'><Link> Terms & Conditions </Link></p>
+            <p className='p3'>Already have an account <Link to={"/login"}>Click here</Link></p>
         <button className='btn' onClick={handleSubmit}>Proceed</button>
       </div>
     </div>

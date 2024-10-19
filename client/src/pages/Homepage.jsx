@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Homepage = () => {
   return (
     <div>
-      <h1>Hey there</h1>
+      <Link to={'/create'}><button className='btn-create'>Create Ineterview</button></Link>
     </div>
   )
 }
