@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import Company from "../models/company.model.js";
@@ -70,7 +69,11 @@ export const login = async (req, res) =>{
             secure: process.env.NODE_ENV === "production"
         });
 
-        return res.status(200).json({message: "Logged In successfully", isVerified: true});
+        return res.status(200).json({message: "Logged In successfully", isVerified: true, data: {
+            name: company.companyName,
+            email: company.companyEmail,
+            isVerified: company.isVerified
+        }});
     } catch (error) {
         console.log(error);
     }
@@ -126,3 +129,13 @@ export const sendOtp = async (req, res) => {
         console.log(error);
     }
 };
+
+export const logout = async (req, res) =>{
+    try {
+        res.clearCookie("token");
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(400);
+    }
+}
