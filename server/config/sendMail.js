@@ -13,13 +13,19 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-export const sendEmailToUsers = (users) => {
-    users.forEach((user) => {
+export const sendEmailToUsers = (candiates, title, description, experienceLevel, endDate, email) => {
+    candiates.forEach((candidate) => {
       const mailOptions = {
-        from: process.eventNames.USER,
-        to: user.email,
-        subject: `Hello ${user.name}`,
-        html: `<p> Dear ${user.name},</p> We're exicted to share some news with you!`
+        from: "Cuvette Jobs",
+        to: candidate.email,
+        subject: `Hello there!`,
+        html: `
+          <h3>${title}</h3>
+          <p>${description}</p>
+          <p>Experience Required for this job ${experienceLevel}</p>
+          <p>Last date to apply ${endDate}</p>
+          <p>Thank you</p>
+        `
       };
 
 

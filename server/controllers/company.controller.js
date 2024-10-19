@@ -55,11 +55,13 @@ export const login = async (req, res) =>{
 
         const company = await Company.findOne({companyEmail: email});
         if(!company) return res.status(401).json("Invalid credentials");
+
         const passwordMatch = bcryptjs.compareSync(password, company.password);
         if(!passwordMatch) return res.status(401).json("Incorrect Passowrd");
-        console.log("crossed db check");
+
+        if(company.isEmailVerified === false) return res.status(201).json({isVerified: false, messaage: "Verify your email"});
         const exp = Date.now() + 1000 * 60 * 60 * 24 * 30;
-        const token = jwt.sign({id: company._id, exp}, process.env.JWT_SECRET);
+        const token = jwt.sign({id: company._id, email: company.companyEmail, exp}, process.env.JWT_SECRET);
         console.log(token);
         res.cookie("token", token, {
             expiresIn : new Date(exp),
@@ -68,7 +70,7 @@ export const login = async (req, res) =>{
             secure: process.env.NODE_ENV === "production"
         });
 
-        return res.status(200).json({message: "Logged In successfully"});
+        return res.status(200).json({message: "Logged In successfully", isVerified: true});
     } catch (error) {
         console.log(error);
     }
@@ -78,7 +80,7 @@ export const verify = async (req, res) => {
     try {
         const {email, otp} = req.body;
         if(!email || !otp) {
-            return res.json(400).json({message: "All fields are required"});
+            return res.status(400).json({message: "All fields are required"});
         };
 
         const company = await Company.findOne({companyEmail: email});
@@ -99,3 +101,28 @@ export const verify = async (req, res) => {
         console.log(error);
     }
 }
+
+
+export const sendOtp = async (req, res) => {
+    try {
+        const { email } = req.body;
+        if(!email) {
+            return res.status(400).json({message: "Email required"});
+        };
+        
+        const company = await Company.findOne({compnayEmail: email});
+        if(!company){
+            return res.status(404).json({message: "Company not found"});
+        };
+
+        const otp =  Math.floor(100000 + Math.random() * 900000).toString(); 
+
+        await sendOtp(email, otp);
+        company.verificationCode = otp;
+        await company.save();
+        return  res.status(200).json({ success: true, message: "Otp send to email"});
+
+    } catch (error) {
+        console.log(error);
+    }
+};
