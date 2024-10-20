@@ -8,7 +8,7 @@ export const createPost = async (req, res) => {
         const {title, description, experienceLevel, endDate, candidates} = req.body;
         if(!title || !description ||  !experienceLevel || !endDate) return res.status(401).json({message: "All field are required"});
         console.log(req.company);
-        const {companyId, email} = req.company;
+        const {id, email} = req.company;
         if(candidates.length>0){
             sendEmailToUsers(candidates, title, description, experienceLevel, endDate, email);
         }
@@ -17,7 +17,7 @@ export const createPost = async (req, res) => {
             description, 
             experienceLevel, 
             endDate,
-            companyId
+            companyId: id
         });
         return res.status(200).json({message: "Post created successfully", success: true, newPost});
     } catch (error) {
