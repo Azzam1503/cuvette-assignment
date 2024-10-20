@@ -7,6 +7,7 @@ export const createPost = async (req, res) => {
         console.log(req.body);
         const {title, description, experienceLevel, endDate, candidates} = req.body;
         if(!title || !description ||  !experienceLevel || !endDate) return res.status(401).json({message: "All field are required"});
+        console.log(req.company);
         const {companyId, email} = req.company;
         if(candidates.length>0){
             sendEmailToUsers(candidates, title, description, experienceLevel, endDate, email);
