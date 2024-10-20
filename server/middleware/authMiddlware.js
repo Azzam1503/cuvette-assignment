@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 const isLoggedIn = async (req, res, next) => {
     try {
+        console.log("Token int auth middleware", token);
         const token = req.cookies.token;
         if(!token) return res.status(401).json({message: "Authentication failed"});
 
