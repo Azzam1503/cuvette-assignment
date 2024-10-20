@@ -11,6 +11,7 @@ const isLoggedIn = async (req, res, next) => {
         if(!decoded){
             return res.status(401).json({message: "Authentication failed"});
         };
+        console.log("In the decoded", decoded);
         req.company = {
             id: decoded.id,
             companyEmail: decoded.email
