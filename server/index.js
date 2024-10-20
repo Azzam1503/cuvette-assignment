@@ -18,7 +18,7 @@ app.use(cookieParser());
 // }));
 
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");  // Set specific origin
+    res.setHeader("Access-Control-Allow-Origin", ["http://localhost:5173", "https://cuvette-assignment-two.vercel.app"]);  // Set specific origin
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");  // Allowed HTTP methods
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");  // Allowed request headers
     res.setHeader("Access-Control-Allow-Credentials", "true");  // Allow credentials like cookies
