@@ -12,12 +12,12 @@ dotenv.config();
 connectDB();
 app.use(express.json());
 app.use(cookieParser());
+const allowedOrigins = ["http://localhost:5173", "https://cuvette-assignment-two.vercel.app"];
 app.use(cors({
     origin: allowedOrigins,
     credentials: true
 }));
 
-const allowedOrigins = ["http://localhost:5173", "https://cuvette-assignment-two.vercel.app"];
 
 // app.use((req, res, next) => {
 //     const origin = req.headers.origin;
